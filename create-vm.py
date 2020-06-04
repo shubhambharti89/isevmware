@@ -5,6 +5,8 @@ import getpass
 import keystroke as key
 import time
 
+#Increase Disk Size to 2400 GB for Production - Curretly 200GB for Testing
+
 def main():
 
 
@@ -40,13 +42,13 @@ def main():
     # connect to the host
     host_con = vm_include.connectToHost(host, user, pw)
 
-    # create the new VM
-    res = vm_include.createGuest(host_con, guest_dc[0], esx_host[0], guest_name[0], guest_ver[0], guest_mem[0], guest_cpu[0], guest_iso, iso_ds, guest_os, guest_space[0], datastore[0], guest_network1[0], guest_network2[0], guest_enterbios)
+    for i in range(0, vmcount) :
+        res = vm_include.createGuest(host_con, guest_dc[i], esx_host[i], guest_name[i], guest_ver[i], guest_mem[i], guest_cpu[i], guest_iso, iso_ds, guest_os, guest_space[i], datastore[i], guest_network1[i], guest_network2[i], guest_enterbios)
 
-    print(res)
+        print(res)
 
     # start the new VM
-    vm_include.powerOnGuest(host_con, guest_name[0])
+        vm_include.powerOnGuest(host_con, guest_name[i])
 
     # disconnect from host
     host_con.disconnect()
@@ -54,9 +56,11 @@ def main():
     time.sleep(20)
 
     setup = ['KEY_1', 'KEY_ENTER']
-    key.keystrokes(host, user, pw, guest_name[0], setup)
 
+    for i in range(0, vmcount):
+        key.keystrokes(host, user, pw, guest_name[i], setup)
 
+    print ("All the devices are installing")
 
 
 
