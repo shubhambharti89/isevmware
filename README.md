@@ -1,5 +1,15 @@
 # isevmware
-Deploy ISE ON VMware and finish up initial configuration
+Deploy ISE On VMware and finish up initial configuration
+
+Requirement:
+
+Python 2
+
+Pysphere
+PyVmomi
+PyVim
+ssl
+openpyxl
 
 
 Create-VM : 
