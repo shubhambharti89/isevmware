@@ -117,6 +117,4 @@ def keystrokes(host,user,password,guest_name, keys):
         print("virtual machine %s not found" % guest_name)
         sys.exit(-1)
 
-    print("Found VirtualMachine: %s Name: %s" % (vm, vm.name))
-
     sendKeyStrokes(vm, keys)
