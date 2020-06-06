@@ -238,6 +238,15 @@ def getntpserver2(sheet,vmcount):
         static_variable.append(sheet.cell(row=i, column=column).value)
     return static_variable
 
+def gettimezone(sheet,vmcount):
+    rows = vmcount + 2
+    column = 19
+    static_variable = []
+    for i in range(2, rows):
+        # reading cell value from source excel file and put it in a list
+        static_variable.append(sheet.cell(row=i, column=column).value)
+    return static_variable
+
 
 def countdown(t):
     while t:
@@ -271,7 +280,9 @@ keycodeDict = {"a": "KEY_A", "b": "KEY_B", "c": "KEY_C", "d": "KEY_D", "e": "KEY
                "o": "KEY_O", "p": "KEY_P", "q": "KEY_Q", "r": "KEY_R", "s": "KEY_S", "t": "KEY_T", "u": "KEY_U",
                "v": "KEY_V", "w": "KEY_W", "x": "KEY_X", "y": "KEY_Y", "z": "KEY_Z", "1": "KEY_1", "2": "KEY_2",
                "3": "KEY_3", "4": "KEY_4", "5": "KEY_5", "6": "KEY_6", "7": "KEY_7", "8": "KEY_8",
-               "9": "KEY_9", "0": "KEY_0", "-": "KEY_MINUS", "{": "KEY_LEFTBRACE", ".": "KEY_DOT"
+               "9": "KEY_9", "0": "KEY_0", "-": "KEY_MINUS", "{": "KEY_LEFTBRACE", ".": "KEY_DOT",
+               "A": ("KEY_CAPSLOCK", 'KEY_A', "KEY_CAPSLOCK"), "B": ("KEY_CAPSLOCK", 'KEY_B', "KEY_CAPSLOCK"),
+               "C": ("KEY_CAPSLOCK", 'KEY_C', "KEY_CAPSLOCK"), "/": "KEY_SLASH"
                }
 
 
