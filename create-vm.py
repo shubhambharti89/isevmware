@@ -5,7 +5,7 @@ import getpass
 import keystroke as key
 import time
 
-#Increase Disk Size to 2400 GB for Production - Curretly 200GB for Testing
+#Increase Disk Size to 2400 GB for Production - Currently 200GB for Testing
 
 def main():
 
@@ -53,16 +53,91 @@ def main():
     # disconnect from host
     host_con.disconnect()
 
+    print("Waiting for Devices to Power-On")
+
     time.sleep(20)
 
-    setup = ['KEY_1', 'KEY_ENTER']
+    boot = ['KEY_1', 'KEY_ENTER']
 
     for i in range(0, vmcount):
-        key.keystrokes(host, user, pw, guest_name[i], setup)
+        vm = key.keystrokes(host, user, pw, guest_name[i])
+        key.sendKeyStrokes(vm, boot)
 
-    print ("All the devices are installing")
+    print ("All the devices are installing : Will go into wait state for 3 hours")
+
+    ti.countdown(10800)
+
+    mgmt_ip = ti.getmgmtip(sheet, vmcount)
+    mgmt_mask = ti.getmgmtmask(sheet, vmcount)
+    mgmt_gateway = ti.getmgmtgateway(sheet, vmcount)
+    def_domain = ti.getdomain(sheet, vmcount)
+    name_server1 = ti.getnameserver1(sheet, vmcount)
+    name_server2 = ti.getnameserver2(sheet, vmcount)
+    ntp_server1 = ti.getntpserver1(sheet, vmcount)
+    ntp_server2 = ti.getntpserver2(sheet, vmcount)
+
+    setup = ['KEY_S', 'KEY_E', 'KEY_T', 'KEY_U', 'KEY_P', 'KEY_ENTER']
+    yes = ['KEY_Y', 'KEY_ENTER']
+    no = ['KEY_N', 'KEY_ENTER']
+    enter = ['KEY_ENTER']
+    password = ["KEY_CAPSLOCK", 'KEY_S', "KEY_CAPSLOCK", 'KEY_H', 'KEY_U', 'KEY_B', 'KEY_H', 'KEY_A', 'KEY_M', 'KEY_8', 'KEY_9', 'KEY_ENTER']
+
+    for i in range(0, vmcount):
+        vm = key.keystrokes(host, user, pw, "GHF")
+        key.sendKeyStrokes(vm, setup)
+        hostname = ti.strtokey(guest_name[i])
+        time.sleep(1)
+        key.sendKeyStrokes(vm, hostname)
+        mgmtip = ti.strtokey(mgmt_ip[i])
+        time.sleep(1)
+        key.sendKeyStrokes(vm, mgmtip)
+        mgmtmask = ti.strtokey(mgmt_mask[i])
+        time.sleep(1)
+        key.sendKeyStrokes(vm, mgmtmask)
+        mgmtgateway = ti.strtokey(mgmt_gateway[i])
+        time.sleep(1)
+        key.sendKeyStrokes(vm, mgmtgateway)
+        key.sendKeyStrokes(vm, no)
+        domain = ti.strtokey(def_domain[i])
+        time.sleep(1)
+        key.sendKeyStrokes(vm, domain)
+        nameserver1 = ti.strtokey(name_server1[i])
+        time.sleep(1)
+        key.sendKeyStrokes(vm, nameserver1)
+        key.sendKeyStrokes(vm, no)
+        ntpserver1 = ti.strtokey(ntp_server1[i])
+        time.sleep(1)
+        key.sendKeyStrokes(vm, ntpserver1)
+        key.sendKeyStrokes(vm, no)
+        time.sleep(1)
+        key.sendKeyStrokes(vm, enter)
+        key.sendKeyStrokes(vm, yes)
+        time.sleep(1)
+        key.sendKeyStrokes(vm, enter)
+        time.sleep(1)
+        key.sendKeyStrokes(vm, password)
+        time.sleep(1)
+        key.sendKeyStrokes(vm, password)
+
+# For Lab purpose as Gateway, NTP, Nameserver wont be reachable
+        time.sleep(5)
+        key.sendKeyStrokes(vm, no)
+        time.sleep(5)
+        key.sendKeyStrokes(vm, no)
+        time.sleep(5)
+        key.sendKeyStrokes(vm, no)
+        time.sleep(5)
+        key.sendKeyStrokes(vm, no)
+        time.sleep(5)
+
+
+
+    print("Devices have been successfully configured : Wait for 15 minutes for Application Server to come up")
+
+
 
 
 
 if __name__ == '__main__':
     main()
+

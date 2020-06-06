@@ -89,7 +89,7 @@ keycodeDict = {"KEY_MOD_LCTRL": "0x01", "KEY_MOD_LSHIFT": "0x02", "KEY_MOD_LALT"
                "KEY_MEDIA_CALC": "0xfb"}
 
 
-def keystrokes(host,user,password,guest_name, keys):
+def keystrokes(host,user,password,guest_name):
 
     si = connect.SmartConnectNoSSL(host=host, user=user,
                                pwd=password, port=443)
@@ -117,4 +117,4 @@ def keystrokes(host,user,password,guest_name, keys):
         print("virtual machine %s not found" % guest_name)
         sys.exit(-1)
 
-    sendKeyStrokes(vm, keys)
+    return vm
