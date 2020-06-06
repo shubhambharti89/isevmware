@@ -80,10 +80,10 @@ def main():
     yes = ['KEY_Y', 'KEY_ENTER']
     no = ['KEY_N', 'KEY_ENTER']
     enter = ['KEY_ENTER']
-    password = ["KEY_CAPSLOCK", 'KEY_S', "KEY_CAPSLOCK", 'KEY_H', 'KEY_U', 'KEY_B', 'KEY_H', 'KEY_A', 'KEY_M', 'KEY_8', 'KEY_9', 'KEY_ENTER']
+    password = ["KEY_CAPSLOCK", 'KEY_C', "KEY_CAPSLOCK", 'KEY_I', 'KEY_S', 'KEY_C', 'KEY_O', 'KEY_V', 'KEY_P', 'KEY_N', 'KEY_ENTER']
 
     for i in range(0, vmcount):
-        vm = key.keystrokes(host, user, pw, "GHF")
+        vm = key.keystrokes(host, user, pw, guest_name[i])
         key.sendKeyStrokes(vm, setup)
         hostname = ti.strtokey(guest_name[i])
         time.sleep(1)
