@@ -80,7 +80,7 @@ def main():
     yes = ['KEY_Y', 'KEY_ENTER']
     no = ['KEY_N', 'KEY_ENTER']
     enter = ['KEY_ENTER']
-    password = ["KEY_CAPSLOCK", 'KEY_C', "KEY_CAPSLOCK", 'KEY_I', 'KEY_S', 'KEY_C', 'KEY_O', 'KEY_V', 'KEY_P', 'KEY_N', 'KEY_ENTER']
+    password = ["KEY_CAPSLOCK", 'KEY_C', "KEY_CAPSLOCK", 'KEY_1', 'KEY_S', 'KEY_C', 'KEY_O', 'KEY_V', 'KEY_P', 'KEY_N','KEY_1', 'KEY_2', 'KEY_3', 'KEY_ENTER']
 
     for i in range(0, vmcount):
         vm = key.keystrokes(host, user, pw, guest_name[i])
