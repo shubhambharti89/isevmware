@@ -255,17 +255,17 @@ def countdown(t):
         print (timeformat, end='\r')
         time.sleep(1)
         t -= 1
-        if t == 5400:
+        if t == 100:
             print("ISE Installation is still going on : 90 minutes to go")
-        if t == 4500:
+        if t == 90:
             print("ISE Installation is still going on : 75 minutes to go")
-        if t == 3600:
+        if t == 80:
             print("ISE Installation is still going on : 1 hour to go")
-        if t == 1800:
+        if t == 70:
             print("ISE Installation is still going on : 30 minutes to go")
-        if t == 900:
+        if t == 60:
             print("ISE Installation is still going on : 15 minutes to go")
-        if t == 300:
+        if t == 54:
             print("ISE Installation is still going on : 5 minutes to go")
 
 
