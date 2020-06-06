@@ -1,4 +1,6 @@
+from __future__ import print_function
 import openpyxl as xl
+import time
 
 
 def Read_Onboard_Sheet(File_Name,index):
@@ -79,7 +81,7 @@ def getcpu(sheet, vmcount):
 
 def getmemory(sheet, vmcount):
 
-    memory = [16000, 32000, 64000, 32000, 96000, 256000]
+    memory = [17000, 33000, 65000, 33000, 97000, 257000]
     rows = vmcount + 2
     column = 2
     static_variable = []
@@ -162,3 +164,121 @@ def getnetwork2(sheet,vmcount):
         # reading cell value from source excel file and put it in a list
         static_variable.append(sheet.cell(row=i, column=column).value)
     return static_variable
+
+
+def getmgmtip(sheet,vmcount):
+    rows = vmcount + 2
+    column = 11
+    static_variable = []
+    for i in range(2, rows):
+        # reading cell value from source excel file and put it in a list
+        static_variable.append(sheet.cell(row=i, column=column).value)
+    return static_variable
+
+def getmgmtmask(sheet,vmcount):
+    rows = vmcount + 2
+    column = 12
+    static_variable = []
+    for i in range(2, rows):
+        # reading cell value from source excel file and put it in a list
+        static_variable.append(sheet.cell(row=i, column=column).value)
+    return static_variable
+
+def getmgmtgateway(sheet,vmcount):
+    rows = vmcount + 2
+    column = 13
+    static_variable = []
+    for i in range(2, rows):
+        # reading cell value from source excel file and put it in a list
+        static_variable.append(sheet.cell(row=i, column=column).value)
+    return static_variable
+
+def getdomain(sheet,vmcount):
+    rows = vmcount + 2
+    column = 14
+    static_variable = []
+    for i in range(2, rows):
+        # reading cell value from source excel file and put it in a list
+        static_variable.append(sheet.cell(row=i, column=column).value)
+    return static_variable
+
+def getnameserver1(sheet,vmcount):
+    rows = vmcount + 2
+    column = 15
+    static_variable = []
+    for i in range(2, rows):
+        # reading cell value from source excel file and put it in a list
+        static_variable.append(sheet.cell(row=i, column=column).value)
+    return static_variable
+
+def getnameserver2(sheet,vmcount):
+    rows = vmcount + 2
+    column = 16
+    static_variable = []
+    for i in range(2, rows):
+        # reading cell value from source excel file and put it in a list
+        static_variable.append(sheet.cell(row=i, column=column).value)
+    return static_variable
+
+def getntpserver1(sheet,vmcount):
+    rows = vmcount + 2
+    column = 17
+    static_variable = []
+    for i in range(2, rows):
+        # reading cell value from source excel file and put it in a list
+        static_variable.append(sheet.cell(row=i, column=column).value)
+    return static_variable
+
+def getntpserver2(sheet,vmcount):
+    rows = vmcount + 2
+    column = 18
+    static_variable = []
+    for i in range(2, rows):
+        # reading cell value from source excel file and put it in a list
+        static_variable.append(sheet.cell(row=i, column=column).value)
+    return static_variable
+
+
+def countdown(t):
+    while t:
+        mins, secs = divmod(t, 60)
+        timeformat = '{:02d}:{:02d}'.format(mins, secs)
+        print (timeformat, end='\r')
+        time.sleep(1)
+        t -= 1
+        if t == 5400:
+            print("ISE Installation is still going on : 90 minutes to go")
+        if t == 4500:
+            print("ISE Installation is still going on : 75 minutes to go")
+        if t == 3600:
+            print("ISE Installation is still going on : 1 hour to go")
+        if t == 1800:
+            print("ISE Installation is still going on : 30 minutes to go")
+        if t == 900:
+            print("ISE Installation is still going on : 15 minutes to go")
+        if t == 300:
+            print("ISE Installation is still going on : 5 minutes to go")
+
+
+    print('ISE Installation Complete - Sending Day-0 Configuration\n')
+
+
+'''
+Dict for Character to Keystroke 
+'''
+keycodeDict = {"a": "KEY_A", "b": "KEY_B", "c": "KEY_C", "d": "KEY_D", "e": "KEY_E", "f": "KEY_F", "g": "KEY_G",
+               "h": "KEY_H", "i": "KEY_I", "j": "KEY_J", "k": "KEY_K", "l": "KEY_L", "m": "KEY_M", "n": "KEY_N",
+               "o": "KEY_O", "p": "KEY_P", "q": "KEY_Q", "r": "KEY_R", "s": "KEY_S", "t": "KEY_T", "u": "KEY_U",
+               "v": "KEY_V", "w": "KEY_W", "x": "KEY_X", "y": "KEY_Y", "z": "KEY_Z", "1": "KEY_1", "2": "KEY_2",
+               "3": "KEY_3", "4": "KEY_4", "5": "KEY_5", "6": "KEY_6", "7": "KEY_7", "8": "KEY_8",
+               "9": "KEY_9", "0": "KEY_0", "-": "KEY_MINUS", "{": "KEY_LEFTBRACE", ".": "KEY_DOT"
+               }
+
+
+def strtokey(key):
+    h =[]
+    vars = list(key)
+    for var in vars:
+        h.append(keycodeDict[var])
+    h.append('KEY_ENTER')
+    return h
