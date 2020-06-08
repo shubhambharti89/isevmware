@@ -65,7 +65,7 @@ def main():
 
     print ("All the devices are installing : Will go into wait state for 3 hours")
 
-    ti.countdown(10800)
+    ti.countdown(12000)
 
     mgmt_ip = ti.getmgmtip(sheet, vmcount)
     mgmt_mask = ti.getmgmtmask(sheet, vmcount)
